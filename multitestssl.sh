@@ -16,7 +16,12 @@ fi
 while IFS= read -r ip; do
   if [ -n "$ip" ]; then
     echo "Eseguendo testssl su $ip..."
-    testssl "$ip" > "testssl_${ip}.txt"
-    echo "Output salvato in ${ip}.txt"
+    # Esegui testssl e salva l'output in una variabile
+    output=$(testssl "$ip")
+    # Stampa l'output a schermo
+    echo "$output"
+    # Salva l'output in un file
+    echo "$output" > "testssl_${ip}.txt"
+    echo "Output salvato in testssl_${ip}.txt"
   fi
 done < "$1"
